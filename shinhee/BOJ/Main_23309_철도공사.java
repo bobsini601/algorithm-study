@@ -9,6 +9,8 @@ public class Main_23309_철도공사 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringBuilder sb = new StringBuilder();
+
 		int N = Integer.parseInt(st.nextToken());		// 역의 개수
 		int M = Integer.parseInt(st.nextToken());		// 공사 횟수
 
@@ -42,7 +44,6 @@ public class Main_23309_철도공사 {
 
 		
 		for(int i=0;i<M;i++) {
-			StringBuilder sb = new StringBuilder();
 			st = new StringTokenizer(br.readLine());
 			String cmd = st.nextToken();
 			int n = Integer.parseInt(st.nextToken());
@@ -55,7 +56,7 @@ public class Main_23309_철도공사 {
 					next_stop[new_stop]	= next_stop[n];		// 1. 새로운 역의 다음역  <- 원래 역의 다음역
 					prev_stop[new_stop]	= n;				// 2. 새로운 역의 이전 역 <- 원래 역
 					next_stop[n]			= new_stop; 	// 3. 다음 역으로 추가
-					sb.append(next_stop[new_stop]);
+					sb.append(next_stop[new_stop]).append('\n');
 					}
 				// BP : 고유 번호 i를 가진 역의 이전 역의 고유 번호를 출력하고, 그 사이에 고유 번호 j인 역을 설립한다.
 				else if(cmd.charAt(1)=='P') { 	// 이전역
@@ -63,7 +64,7 @@ public class Main_23309_철도공사 {
 					prev_stop[new_stop]			= prev_stop[n]; // 2. 새로운 역의 이전 역 <- 원래 역의 이전 역
 					next_stop[new_stop]			= n;			// 3. 새로운 역의 다음 역 <- 원래 역
 					prev_stop[n]				= new_stop;		// 4. 원래 역의 이전 역 <- 새로운 역의 이전 역
-					sb.append(prev_stop[new_stop]);	
+					sb.append(prev_stop[new_stop]).append('\n');	
 				}
 			}
 			else if (cmd.charAt(0)=='C') {		// 폐쇄
@@ -82,10 +83,10 @@ public class Main_23309_철도공사 {
 				}
 				// 삭제할 역 초기화
 				next_stop[del_stop]=0; prev_stop[del_stop]=0;
-				sb.append(del_stop);
+				sb.append(del_stop).append('\n');
 			}
-			System.out.println(sb);
 		}
+		System.out.println(sb);
 
 	}
 }
